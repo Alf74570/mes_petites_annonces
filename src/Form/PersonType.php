@@ -25,8 +25,8 @@ class PersonType extends AbstractType
             ->add('phonenumber')
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Mot de Passe'),
-                'second_options' => array('label' => 'Mot de Passe'),
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Password'),
             ))
             ->add('save', SubmitType::class)
         ;
