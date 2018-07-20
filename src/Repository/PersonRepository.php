@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Person;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Person|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +14,24 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Person[]    findAll()
  * @method Person[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PersonRepository extends ServiceEntityRepository
+class PersonRepository extends EntityRepository implements UserLoaderInterface
 {
-    public function __construct(RegistryInterface $registry)
+    /*public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Person::class);
+    }*/
+
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.phonenumber = :phonenumber OR u.email = :email')
+            ->setParameter('phonenumber', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
+
+
 
 //    /**
 //     * @return Person[] Returns an array of Person objects

@@ -1,0 +1,14 @@
+/*base*/
+body{background: #ebeff2;}
+.bck1{background: #fff;}
+
+/*generique*/
+.padded{padding: 15px;}
+
+/*header*/
+header#header {margin-bottom: 20px;padding: 10px;}
+header#header h1 {text-align: center;color: #495CFF;}
+header#header h3 {text-align: center;color: #77ABD6;}
+
+/*footer*/
+footer#footer{margin-top: 20px;padding: 10px;}

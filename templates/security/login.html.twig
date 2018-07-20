@@ -1,0 +1,21 @@
+{# templates/security/login.html.twig #}
+{# ... you will probably extend your base template, like base.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if error %}
+        <div class="alert alert-danger">
+            <ul class="list-unstyled mb-0">
+                <li><span class="initialism form-error-icon badge badge-danger">Error</span>
+                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    {{form(form)}}
+    <div>
+        <a href="{{ path('request_reseting') }}" class="btn btn-secondary btn-block">Mot de passe oublié ?</a>
+    </div>
+{% endblock %}

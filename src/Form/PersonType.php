@@ -17,18 +17,26 @@ class PersonType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                "label"=> "pseudo"
+                "label"=> "Pseudo"
             ])
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email')
-            ->add('phonenumber')
-            ->add('password', RepeatedType::class, array(
+            ->add('firstname', TextType::class, [
+                "label"=> "Prénom"
+            ])
+            ->add('lastname', TextType::class, [
+                "label"=> "Nom"
+            ])
+            ->add('email', TextType::class, [
+                "label"=> "Email"
+            ])
+            ->add('phonenumber',TextType::class, [
+                "label"=> "Téléphone"
+            ])
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Mot de Passe'),
-                'second_options' => array('label' => 'Mot de Passe'),
+                'second_options' => array('label' => 'Confirmation du Mot de Passe'),
             ))
-            ->add('save', SubmitType::class)
+            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 
