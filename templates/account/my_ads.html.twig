@@ -1,0 +1,47 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+    <div class="container">
+    <h2 class="text-center">Mes annonces publiées...</h2>
+        <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Catégorie</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {%  for ad in ads %}
+            <tr>
+                <td>{{ ad.creationdate|date('d F Y') }}</td>
+                <td>{{ ad.category }}</td>
+                <td>{{ ad.title }}</td>
+                <td>{{ ad.description }}</td>
+                <td>{{ ad.price }} EUR</td>
+                <td>
+                    <form method="post" action="{{ path('ad_delete' , {'ad': ad.id} ) }}" onsubmit="return confirm('Etes vous sur de supprimer votre annonce?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
+                        <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="icon-trash icon-large"></span></button>
+                    </form>
+                </td>
+                <td>
+                    <a class="btn btn-warning" href="#" data-toggle="tooltip" data-placement="top" title="En sommeil"><span class="icon-off icon-large"></span></a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('ad_show', {'ad' : ad.id }) }}" data-toggle="tooltip"  data-placement="top" title="Editer"><span class="icon-edit icon-large"></span></a>
+                </td>
+             </tr>
+             {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

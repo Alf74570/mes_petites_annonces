@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container border rounded pt-4">
+        <h2 class="text-center text-primary">{{ ad.title }}</h2>
+        <br>
+        <div class="d-block border rounded text-center bg-light"><h5>Date de création</h5></div>
+        <div class="d-block text-center mt-1"><span>Le {{ ad.creationdate|date('d F Y') }}</span></div>
+
+        <div class="d-block border rounded text-center mt-3 bg-light"><h5>Description</h5></div>
+        <div class="mt-1d-block text-center mt-1"><span>{{ ad.description }}</span></div>
+
+        <div class="d-block border rounded text-center mt-3 bg-light"><h5>Prix</h5></div>
+        <div class="d-block text-center mt-1"><span class="text-danger">{{ ad.price }} EUR</span></div>
+
+        <div class="d-block border rounded text-center mt-3 bg-light"><h5>Région</h5></div>
+        <div class="d-block text-center mt-1"><span>{{ ad.country }}</span></div>
+
+        <div class="d-block border rounded text-center mt-3 bg-light"><h5>Photos</h5></div>
+        <div class="d-block text-center mt-1"><span>Photo 01</span><br>
+            <span>Photo 02</span><br>
+            <span>Photo 03</span><br>
+        </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-around">
+        <a class="btn btn-info" href="{{ path('mes_annonces') }}" data-toggle="tooltip" data-placement="top" title="Retour"><span class="icon-reply icon-large"></span></a>
+
+        <a href="{{ path('ad_edit', {'ad': ad.id}) }}" class="btn btn-primary w-25">Modifier</a>
+
+        <form method="post" action="{{ path('ad_delete' , {'ad': ad.id} ) }}" onsubmit="return confirm('Etes vous sur de supprimer votre annonce?');">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
+            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="icon-trash icon-large"></span></button>
+        </form>
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

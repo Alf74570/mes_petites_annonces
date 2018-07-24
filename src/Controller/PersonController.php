@@ -21,7 +21,7 @@ class PersonController extends Controller
         $person->setFirstname('Alexandre');
         $person->setLastname('Biagi');
         $person->setEmail('a.bipppakkgi@orange.fr');
-        $person->setPhonenumber('06.35.41oooo.44.76');
+        $person->setPhonenumber('06.35.41.44.76');
         $person->setPassword('aze');
         $person->setUsername('Alf74');
 

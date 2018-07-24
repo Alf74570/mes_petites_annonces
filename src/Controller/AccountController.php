@@ -53,4 +53,15 @@ class AccountController extends Controller
             'form' => $form->createView(), 'title'=>'ArnaK.com', 'title2'=>'Le site d\'annonces qui vous dépouille...'
         ]);
     }
+
+    /**
+     * @Route("/my_ad", name="mes_annonces")
+     */
+    public function show(): Response
+    {
+        $person = $this->getUser();
+        $ads = $person->getAds();
+        return $this->render('account/my_ads.html.twig', ['person' => $person , 'ads' => $ads ]);
+    }
+
 }

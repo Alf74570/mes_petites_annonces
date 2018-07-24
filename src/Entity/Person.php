@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -89,10 +91,16 @@ class Person implements UserInterface
      */
     private $token;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="author")
+     */
+    private $ads;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->roles = ['ROLE_USER'];
+        $this->ads = new ArrayCollection();
     }
 
     public function getId()
@@ -253,6 +261,37 @@ class Person implements UserInterface
     public function setToken($token)
     {
         $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ad[]
+     */
+    public function getAds(): Collection
+    {
+        return $this->ads;
+    }
+
+    public function addAd(Ad $ad): self
+    {
+        if (!$this->ads->contains($ad)) {
+            $this->ads[] = $ad;
+            $ad->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAd(Ad $ad): self
+    {
+        if ($this->ads->contains($ad)) {
+            $this->ads->removeElement($ad);
+            // set the owning side to null (unless already changed)
+            if ($ad->getAuthor() === $this) {
+                $ad->setAuthor(null);
+            }
+        }
+
         return $this;
     }
 }

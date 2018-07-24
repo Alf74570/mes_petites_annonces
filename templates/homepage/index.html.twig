@@ -1,14 +1,39 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% extends 'base.html.twig'%}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <h2 class="text-center">Les annonces du jour...</h2>
+        <br>
+        <table class="table table-striped">
+            <thead>
+            <tr class="text-center">
+                <th>Date</th>
+                <th>Catégorie</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Région</th>
+                {% if is_granted('ROLE_USER') %}
+                    <th>Vendeur</th>
+                {% endif %}
+            </tr>
+            </thead>
 
-<div class="example-wrapper">
-    <h3>Les annonces du jour</h3>
-</div>
+            <tbody>
+                {% for ad in ads %}
+                <tr onclick="if(confirm('Merci de vous connectez pour plus de détails !!!')) { window.location = '{{ path('login') }}' }">
+                    <td class="text-primary">{{ ad.creationdate|date('d F Y') }}</td>
+                    <td>{{ ad.category }}</td>
+                    <td class="text-info">{{ ad.title }}</td>
+                    <td>{{ ad.description }}</td>
+                    <td class="text-danger">{{ ad.price }} EUR</td>
+                    <td>{{ ad.country }}</td>
+                    {% if is_granted('ROLE_USER') %}
+                    <td>{{ ad.author.username }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

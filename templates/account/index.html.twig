@@ -3,4 +3,11 @@
 {% block body %}
     <h1 class="text-center">Mon compte</h1>
     {{ include('form.html.twig') }}
+    <div>
+        <a href="{{ path('mes_annonces') }}" class="btn btn-info btn-block">Mes annonces</a>
+    </div>
+
 {% endblock %}
+
+
+

@@ -33,10 +33,15 @@ class PersonType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
+
                 'first_options'  => array('label' => 'Mot de Passe'),
                 'second_options' => array('label' => 'Confirmation du Mot de Passe'),
+
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Password'),
+
             ))
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
+            ->add('submit', SubmitType::class, ['label'=>'Mettre à Jour', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 
