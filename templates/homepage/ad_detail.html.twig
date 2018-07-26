@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container border rounded pt-4">
+    <h2 class="text-center text-primary">{{ ad.title }}</h2>
+    <br>
+    <div class="d-block border rounded text-center bg-light"><h5>Vendeur</h5></div>
+    <div class="d-block text-center mt-1"><span>{{ ad.author.username }}</span></div>
+
+    <div class="d-block border rounded text-center bg-light"><h5>Date de création</h5></div>
+    <div class="d-block text-center mt-1"><span>Le {{ ad.creationdate|date('d F Y') }}</span></div>
+
+    <div class="d-block border rounded text-center mt-3 bg-light"><h5>Description</h5></div>
+    <div class="mt-1d-block text-center mt-1"><span>{{ ad.description }}</span></div>
+
+    <div class="d-block border rounded text-center mt-3 bg-light"><h5>Prix</h5></div>
+    <div class="d-block text-center mt-1"><span class="text-danger">{{ ad.price }} EUR</span></div>
+
+    <div class="d-block border rounded text-center mt-3 bg-light"><h5>Région</h5></div>
+    <div class="d-block text-center mt-1"><span>{{ ad.country }}</span></div>
+
+    <div class="d-block border rounded text-center mt-3 bg-light"><h5>Photos</h5></div>
+    <br>
+    <div class="d-block text-center mt-1">
+        <img style="width: auto; height: 150px" src="{{ '/photos/'~ad.photo }}" alt="">
+    </div>
+    <br>
+</div>
+<br>
+<div class="d-flex justify-content-around">
+    <a class="btn btn-info" href="{{ path('homepage') }}" data-toggle="tooltip" data-placement="top" title="Retour"><span class="icon-reply icon-large"></span></a>
+
+    <a href="#" class="btn btn-primary w-25">Contacter le vendeur</a>
+</div>
+{% endblock %}

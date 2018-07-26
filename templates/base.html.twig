@@ -14,6 +14,7 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         {# custom #}
         <link rel="stylesheet" href="/css/styles.css">
+        {#<link rel="stylesheet" href="/css/drag_n_drop.css">#}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="" />
 </head>
@@ -47,12 +48,12 @@
             {% endif %}
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{path('account')}}">Les annonces du jour</a>
+                    <a class="nav-link" href="{{path('ad_new')}}">Déposer une annonce</a>
                 </li>
             {% endif %}
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{path('ad_new')}}">Déposer une annonce</a>
+                    <a class="nav-link" href="{{path('mes_annonces')}}">Mes annonces</a>
                 </li>
             {% endif %}
         </ul>
@@ -113,8 +114,12 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>{% endblock %}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    {#<script src="/js/drag_n_drop.js"></script>#}
+{% endblock %}
 </body>
 </html>

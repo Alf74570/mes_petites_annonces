@@ -61,7 +61,11 @@ class AccountController extends Controller
     {
         $person = $this->getUser();
         $ads = $person->getAds();
-        return $this->render('account/my_ads.html.twig', ['person' => $person , 'ads' => $ads ]);
+        return $this->render('account/my_ads.html.twig', [
+            'person' => $person ,
+            'ads' => $ads, 'title'=>'ArnaK.com',
+            'title2'=>'Le site d\'annonces qui vous dépouille...'
+        ]);
     }
 
 }

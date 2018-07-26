@@ -2,13 +2,14 @@
 
 {% block body %}
     <div class="container">
-        <h2 class="text-center">Les annonces du jour...</h2>
+        <h2 class="text-center">Les annonces en cours...</h2>
         <br>
         <table class="table table-striped">
             <thead>
             <tr class="text-center">
                 <th>Date</th>
                 <th>Catégorie</th>
+                <th></th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Prix</th>
@@ -21,19 +22,23 @@
 
             <tbody>
                 {% for ad in ads %}
-                <tr onclick="if(confirm('Merci de vous connectez pour plus de détails !!!')) { window.location = '{{ path('login') }}' }">
-                    <td class="text-primary">{{ ad.creationdate|date('d F Y') }}</td>
-                    <td>{{ ad.category }}</td>
-                    <td class="text-info">{{ ad.title }}</td>
-                    <td>{{ ad.description }}</td>
-                    <td class="text-danger">{{ ad.price }} EUR</td>
-                    <td>{{ ad.country }}</td>
-                    {% if is_granted('ROLE_USER') %}
-                    <td>{{ ad.author.username }}</td>
-                    {% endif %}
-                </tr>
+                        <tr class="text-center clickable-row" data-href="{{ path('ad_detail', {'ad' : ad.id}) }}" >
+                            <td class="text-primary">{{ ad.creationdate|date('d F Y') }}</td>
+                            <td class="font-weight-bold">{{ ad.category }}</td>
+                            <td><img height="75" width="75" src="{{ '/photos/' ~ ad.photo }}" alt="" class="rounded-circle"></td>
+                            <td class="text-info">{{ ad.title }}</td>
+                            <td>{{ ad.description }}</td>
+                            <td class="text-danger text-danger font-weight-bold">{{ ad.price }} EUR</td>
+                            <td>{{ ad.country }}</td>
+                            {% if is_granted('ROLE_USER') %}
+                            <td>{{ ad.author.username }}</td>
+                            {% endif %}
+                        </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 {% endblock %}
+
+{#
+onclick="if(confirm('Merci de vous connectez pour plus de détails !!!')) { window.location = '{{ path('login') }}' }"#}

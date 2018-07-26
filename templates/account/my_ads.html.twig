@@ -9,6 +9,7 @@
             <tr>
                 <th>Date</th>
                 <th>Catégorie</th>
+                <th>Photos</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Prix</th>
@@ -20,16 +21,17 @@
 
         <tbody>
             {%  for ad in ads %}
-            <tr>
+            <tr class="text-center">
                 <td>{{ ad.creationdate|date('d F Y') }}</td>
                 <td>{{ ad.category }}</td>
+                <td><img height="75" width="75" src="{{ '/photos/' ~ ad.photo }}" alt="" class="rounded-circle"></td>
                 <td>{{ ad.title }}</td>
                 <td>{{ ad.description }}</td>
-                <td>{{ ad.price }} EUR</td>
+                <td class="text-danger font-weight-bold">{{ ad.price }} EUR</td>
                 <td>
-                    <form method="post" action="{{ path('ad_delete' , {'ad': ad.id} ) }}" onsubmit="return confirm('Etes vous sur de supprimer votre annonce?');">
+                    <form method="post" action="{{ path('ad_delete' , {'ad': ad.id} ) }}" onsubmit="confirm('Etes vous sur de supprimer votre annonce?');">
                         <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('ad' ~ ad.id) }}">
                         <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="icon-trash icon-large"></span></button>
                     </form>
                 </td>

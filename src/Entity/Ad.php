@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
@@ -51,6 +54,16 @@ class Ad
      * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="ads")
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci, d'insérer une photo pour l'annonce au format JPEG.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $photo;
+
+
+    private $photoFile;
 
     public function getId()
     {
@@ -139,5 +152,33 @@ class Ad
         $this->author = $author;
 
         return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    /**
+     * @param mixed $photoFile
+     */
+    public function setPhotoFile($photoFile): void
+    {
+        $this->photoFile = $photoFile;
     }
 }

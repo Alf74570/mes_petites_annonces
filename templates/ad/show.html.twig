@@ -17,10 +17,11 @@
         <div class="d-block text-center mt-1"><span>{{ ad.country }}</span></div>
 
         <div class="d-block border rounded text-center mt-3 bg-light"><h5>Photos</h5></div>
-        <div class="d-block text-center mt-1"><span>Photo 01</span><br>
-            <span>Photo 02</span><br>
-            <span>Photo 03</span><br>
+        <br>
+        <div class="d-block text-center mt-1">
+            <img style="width: auto; height: 150px" src="{{ '/photos/'~ad.photo }}" alt="">
         </div>
+        <br>
     </div>
     <br>
     <div class="d-flex justify-content-around">
@@ -30,7 +31,7 @@
 
         <form method="post" action="{{ path('ad_delete' , {'ad': ad.id} ) }}" onsubmit="return confirm('Etes vous sur de supprimer votre annonce?');">
           <input type="hidden" name="_method" value="DELETE">
-          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
+          <input type="hidden" name="_token" value="{{ csrf_token('ad' ~ ad.id) }}">
             <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer"><span class="icon-trash icon-large"></span></button>
         </form>
     </div>

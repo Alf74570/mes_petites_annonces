@@ -3,24 +3,19 @@
 
 {{ form_start(form) }}
     {{ form_row(form.category) }}
-
     {{ form_row(form.title) }}
-
     {{ form_row(form.description) }}
 
     <div class="d-flex justify-content-between">
-
         {{ form_row(form.creation_date) }}
-
         {{ form_row(form.price) }}
-
         {{ form_row(form.country) }}
     </div>
 
-<br>
+    {{ form_row(form.photo) }}
 {{ form_end(form) }}
     <div>
-        <a href="{{ path('mes_annonces') }}" class="btn btn-warning btn-block">Annuler</a>
+        <a href="{{ path('mes_annonces') }}" class="btn btn-secondary btn-block">Annuler</a>
     </div>
     <br>
 {% endblock %}
