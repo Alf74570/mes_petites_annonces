@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block search %}
+{{ form_start(form) }}
+    <nav id="main-nav" class="container navbar navbar-expand-lg navbar-light bg-light border rounded mb-3">
+        <ul class="navbar-nav">
+            <li class="input-group">
+                {{ form_row(form.search) }}
+            </li>
+            <li class="input-group">
+                {{ form_row(form.country) }}
+            </li>
+            <li class="input-group">
+                {{ form_row(form.category) }}
+            </li>
+            <li class="input-group">
+                {{ form_row(form.author) }}
+            </li>
+        </ul>
+    </nav>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block body %}
+
+
+
+{% endblock %}
+
+{#<form action="{{ path('recherche_avancee') }}" method="post">
+            <input class="form-control py-2 border-right-0 border text-right" type="search" name="advanced_search" placeholder="&#xF002;" style="font-family:Arial, FontAwesome">
+        </form>#}

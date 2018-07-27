@@ -22,10 +22,23 @@
 <body id="{% block body_id %}{% endblock %}">
 
 {% block header %}
-    <header id="header" class="bck1 border-bottom">
-        <div class="container">
-            <h1>{% if title is defined %}{{title}}{% else %}Header{% endif %}</h1>
-            <h3>{% if title2 is defined %}{{title2}}{% endif %}</h3>
+    <header id="header" class="bck1 border-bottom align-middle">
+        <div class="container ">
+            <div class="row">
+            <div class="col-10">
+                <div class="ml-5 pl-5">
+                    <h1>{% if title is defined %}{{title}}{% else %}Header{% endif %}</h1>
+                    <h3>{% if title2 is defined %}{{title2}}{% endif %}</h3>
+                </div>
+            </div>
+                {% if is_granted('ROLE_USER') %}
+                <div class="col-2">
+                    <div><br>
+                        <a class="btn btn-outline-warning text-right" href="{{path('logout')}}">Déconnexion</a>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
         </div>
     </header>
 {% endblock %}
@@ -60,10 +73,10 @@
         <ul class="navbar-nav ml-auto">
             {% if is_granted('ROLE_USER') %}
                 <li class="input-group">
-                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Rechercher" id="example-search-input">
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
+                    <form action="{{ path('search') }}" method="post">
+                        <input class="form-control py-2 border-right-0 border text-right" type="search" name="search" placeholder="&#xF002;" style="font-family:Arial, FontAwesome">
+                    </form>
+                    <a class="nav-link text-center" href="{{path('vue_recherche_avancee')}}">Recherche Avancée</a>
                 </li>
             {% else %}
                 <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
@@ -75,6 +88,10 @@
             {% endif %}
         </ul>
     </nav>
+{% endblock %}
+
+
+{% block search %}
 {% endblock %}
 
 {% block flash %}

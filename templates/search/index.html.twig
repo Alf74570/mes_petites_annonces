@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="text-center">Résultat de votre recherche...</h2>
+        <br>
+        <table class="table table-striped">
+            <thead>
+            <tr class="text-center">
+                <th>Date</th>
+                <th>Catégorie</th>
+                <th></th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Région</th>
+                {% if is_granted('ROLE_USER') %}
+                    <th>Vendeur</th>
+                {% endif %}
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for ad in ads %}
+                <tr class="text-center clickable-row" data-href="{{ path('ad_detail', {'ad' : ad.id}) }}" >
+                    <td class="text-primary">{{ ad.creationdate|date('d F Y') }}</td>
+                    <td class="font-weight-bold">{{ ad.category }}</td>
+                    <td><img height="75" width="75" src="{{ '/photos/' ~ ad.photo }}" alt="" class="rounded-circle"></td>
+                    <td class="text-info">{{ ad.title }}</td>
+                    <td>{{ ad.description }}</td>
+                    <td class="text-danger text-danger font-weight-bold">{{ ad.price }} EUR</td>
+                    <td>{{ ad.country }}</td>
+                    {% if is_granted('ROLE_USER') %}
+                        <td>{{ ad.author.username }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if ads == null %}
+        <h4 class="text-center">Aucun résultat trouvé</h4>
+    {% endif %}
+
+    <div class="d-flex justify-content-around">
+        <a class="btn btn-info" href="{{ path('homepage') }}" data-toggle="tooltip" data-placement="top" title="Retour"><span class="icon-reply icon-large"></span></a>
+    </div>
+
+{% endblock %}
